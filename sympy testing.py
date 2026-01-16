@@ -5,7 +5,7 @@ import random
 
 x = smp.symbols('x')
 b = random.randint(1, 5)
-y = smp.sin(x*2) + b
+y = smp.sin(x) + b
 
 y_f = smp.lambdify(x, y) 
 p = random.randint(1, 60)
