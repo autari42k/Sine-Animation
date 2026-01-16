@@ -31,7 +31,6 @@ for i in range(1, 1000):
     plt.plot(0, y, 'o')
     plt.ylim(0, init + 5)
     plt.xlim(-1, 1)
-
     
 
     plt.pause(0.001)
