@@ -10,7 +10,7 @@ plt.ion()
 
 y = init
 v = 0
-dt = 0.05
+dt = 0.08
 
 fig = plt.figure(1)
 

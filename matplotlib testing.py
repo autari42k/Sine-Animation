@@ -9,7 +9,7 @@ y = random.randint(100, 200)
 
 fig, ax = plt.subplots()
 
-ax.set_title("Ding Dong's Aura")
+ax.set_title("Liz's Aura")
 ax.set_xlabel("Age")
 ax.set_ylabel("Aura Level")
 ax.grid(True)
@@ -18,7 +18,7 @@ ax.grid(True)
 for i in range(100):
     
     x += 2
-    y *= 0.5
+    y *= 2
 
     x_vals.append(x)
     y_vals.append(y)
