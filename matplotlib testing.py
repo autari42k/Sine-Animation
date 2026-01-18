@@ -24,6 +24,8 @@ for i in range(100):
     y_vals.append(y)
 
     ax.plot(x_vals, y_vals, color='blue')
+    plt.ylim(0, 500)
+    plt.xlim(0, 100)
     
 
     plt.pause(0.1)

@@ -27,7 +27,7 @@ class PhysicsEngine:
             'pos': list(position),
             'velocity': list(velocity),
             'color': self.colors[random.randint(0, len(self.colors) - 1)],
-            'radius': random.randint(7, 15)
+            'radius': random.randint(15, 20)
         }
         self.balls.append(ball)
 
@@ -36,7 +36,40 @@ class PhysicsEngine:
             for j in range(i + 1, len(self.balls)):
                 ball1 = self.balls[i]
                 ball2 = self.balls[j]
+            
+                dx = ball1['pos'][0] - ball2['pos'][0]
+                dy = ball1['pos'][1] - ball2['pos'][1]
+                distance = sqrt(dx**2 + dy**2)
 
+                if distance < ball1['radius'] + ball2['radius']:
+                    nx = dx / distance
+                    ny = dy / distance
+
+                    tx = -ny
+                    ty = nx
+
+                    Tan1 = tx * ball1['velocity'][0] + ty * ball1['velocity'][1]
+                    Tan2 = tx * ball2['velocity'][0] + ty * ball2['velocity'][1]
+
+                    Norm1 = nx * ball1['velocity'][0] + ny * ball1['velocity'][1]
+                    Norm2 = nx * ball2['velocity'][0] + ny * ball2['velocity'][1]
+
+                    m1 = m2 = 1
+
+                    vNorm1 = (Norm1 * (m1 - m2) + 2 * m2 * Norm1) / (m1 + m2)
+                    vNorm2 = (Norm2 * (m2 - m1) + 2 * m1 * Norm2) / (m1 + m2)
+
+                    ball1['velocity'][0] = tx * Tan1 + nx * vNorm1
+                    ball1['velocity'][1] = ty * Tan1 + ny * vNorm1
+                    ball2['velocity'][0] = tx * Tan2 + nx * vNorm2
+                    ball2['velocity'][1] = ty * Tan2 + ny * vNorm2
+
+                    overlap = ball1['radius'] + ball2['radius'] - distance
+                    ball1['pos'][0] += nx * overlap / 2
+                    ball1['pos'][1] += ny * overlap / 2
+                    ball2['pos'][0] -= nx * overlap / 2
+                    ball2['pos'][1] -= ny * overlap / 2
+                    
     
     def update(self):
         for ball in self.balls:
@@ -59,6 +92,8 @@ class PhysicsEngine:
             if ball['pos'][1] + ball['radius'] <= 0:
                 ball['pos'][1] = ball['radius']
                 ball['velocity'][1] = -ball['velocity'][1] * 0.7
+            
+            self.collisions()
                 
     def draw(self):
         self.window.fill((0, 0, 0))
