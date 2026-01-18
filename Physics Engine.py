@@ -56,8 +56,8 @@ class PhysicsEngine:
 
                     m1 = m2 = 1
 
-                    vNorm1 = (Norm1 * (m1 - m2) + 2 * m2 * Norm1) / (m1 + m2)
-                    vNorm2 = (Norm2 * (m2 - m1) + 2 * m1 * Norm2) / (m1 + m2)
+                    vNorm1 = (Norm1 * (m1 - m2) + 2 * m2 * Norm2) / (m1 + m2)
+                    vNorm2 = (Norm2 * (m2 - m1) + 2 * m1 * Norm1) / (m1 + m2)
 
                     ball1['velocity'][0] = tx * Tan1 + nx * vNorm1
                     ball1['velocity'][1] = ty * Tan1 + ny * vNorm1
